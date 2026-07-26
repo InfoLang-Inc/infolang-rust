@@ -1,0 +1,31 @@
+[package]
+name = "infolang"
+version = "0.3.0"
+edition = "2021"
+rust-version = "1.75"
+description = "Official Rust client for InfoLang semantic memory"
+license = "Apache-2.0"
+repository = "https://github.com/InfoLang-Inc/infolang-rust"
+homepage = "https://infolang.ai"
+documentation = "https://docs.infolang.ai/integrations/rust"
+readme = "README.md"
+keywords = ["infolang", "memory", "ai", "agents", "semantic-search"]
+categories = ["api-bindings", "asynchronous"]
+exclude = [".github/"]
+
+[dependencies]
+reqwest = { version = "0.12", default-features = false, features = ["json", "multipart", "rustls-tls"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+tokio = { version = "1", features = ["sync", "time"] }
+urlencoding = "2"
+
+[dev-dependencies]
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+wiremock = "0.6"
+serial_test = "3"
+
+[lib]
+name = "infolang"
+path = "src/lib.rs"
