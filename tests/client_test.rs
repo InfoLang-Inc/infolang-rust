@@ -54,6 +54,7 @@ fn whoami_body(ids: &[&str]) -> serde_json::Value {
 // --- recall ----------------------------------------------------------------
 
 #[tokio::test]
+#[serial]
 async fn investigate_sends_recall_with_top_k_and_headers() {
     clear_env();
     let server = MockServer::start().await;
@@ -89,6 +90,7 @@ async fn investigate_sends_recall_with_top_k_and_headers() {
 }
 
 #[tokio::test]
+#[serial]
 async fn recall_parses_verbose_hit_fields_and_weak() {
     clear_env();
     let server = MockServer::start().await;
@@ -130,6 +132,7 @@ async fn recall_parses_verbose_hit_fields_and_weak() {
 }
 
 #[tokio::test]
+#[serial]
 async fn recall_serializes_extras_only_when_some() {
     clear_env();
     let server = MockServer::start().await;
@@ -171,6 +174,7 @@ async fn recall_serializes_extras_only_when_some() {
 }
 
 #[tokio::test]
+#[serial]
 async fn recall_omits_extras_when_none() {
     clear_env();
     let server = MockServer::start().await;
@@ -190,6 +194,7 @@ async fn recall_omits_extras_when_none() {
 }
 
 #[tokio::test]
+#[serial]
 async fn workspace_id_is_percent_encoded_in_paths() {
     clear_env();
     let server = MockServer::start().await;
@@ -212,6 +217,7 @@ async fn workspace_id_is_percent_encoded_in_paths() {
 // --- remember / forget -----------------------------------------------------
 
 #[tokio::test]
+#[serial]
 async fn remember_sends_tags_array_and_parses_dedup_fields() {
     clear_env();
     let server = MockServer::start().await;
@@ -256,6 +262,7 @@ async fn remember_sends_tags_array_and_parses_dedup_fields() {
 }
 
 #[tokio::test]
+#[serial]
 async fn forget_sends_namespace_query() {
     clear_env();
     let server = MockServer::start().await;
@@ -272,6 +279,7 @@ async fn forget_sends_namespace_query() {
 }
 
 #[tokio::test]
+#[serial]
 async fn forget_omits_namespace_when_unset() {
     clear_env();
     let server = MockServer::start().await;
@@ -298,6 +306,7 @@ async fn forget_omits_namespace_when_unset() {
 // --- list / namespaces -----------------------------------------------------
 
 #[tokio::test]
+#[serial]
 async fn list_builds_query_and_parses_page() {
     clear_env();
     let server = MockServer::start().await;
@@ -345,6 +354,7 @@ async fn list_builds_query_and_parses_page() {
 }
 
 #[tokio::test]
+#[serial]
 async fn namespaces_tolerates_bare_strings() {
     clear_env();
     let server = MockServer::start().await;
@@ -372,6 +382,7 @@ async fn namespaces_tolerates_bare_strings() {
 
 #[tokio::test]
 #[allow(deprecated)]
+#[serial]
 async fn list_recent_deprecated_wraps_list() {
     clear_env();
     let server = MockServer::start().await;
@@ -401,6 +412,7 @@ async fn list_recent_deprecated_wraps_list() {
 // --- encode / similarity / execute / stats --------------------------------
 
 #[tokio::test]
+#[serial]
 async fn encode_and_similarity_post_expected_bodies() {
     clear_env();
     let server = MockServer::start().await;
@@ -432,6 +444,7 @@ async fn encode_and_similarity_post_expected_bodies() {
 }
 
 #[tokio::test]
+#[serial]
 async fn execute_sends_simple_operations_body_and_parses_op_result() {
     clear_env();
     let server = MockServer::start().await;
@@ -466,6 +479,7 @@ async fn execute_sends_simple_operations_body_and_parses_op_result() {
 }
 
 #[tokio::test]
+#[serial]
 async fn stats_parses_op_result_error() {
     clear_env();
     let server = MockServer::start().await;
@@ -490,6 +504,7 @@ async fn stats_parses_op_result_error() {
 // --- ingest ----------------------------------------------------------------
 
 #[tokio::test]
+#[serial]
 async fn ingest_sends_zip_bytes_with_content_type_and_query() {
     clear_env();
     let server = MockServer::start().await;
@@ -534,6 +549,7 @@ async fn ingest_sends_zip_bytes_with_content_type_and_query() {
 }
 
 #[tokio::test]
+#[serial]
 async fn ingest_files_sends_multipart_parts() {
     clear_env();
     let server = MockServer::start().await;
@@ -586,6 +602,7 @@ async fn ingest_files_sends_multipart_parts() {
 // --- workspace resolution --------------------------------------------------
 
 #[tokio::test]
+#[serial]
 async fn explicit_workspace_skips_whoami() {
     clear_env();
     let server = MockServer::start().await;
@@ -704,6 +721,7 @@ async fn failed_resolution_is_not_cached() {
 }
 
 #[tokio::test]
+#[serial]
 async fn whoami_parses_identity() {
     clear_env();
     let server = MockServer::start().await;
@@ -734,6 +752,7 @@ async fn whoami_parses_identity() {
 // --- remember_batch --------------------------------------------------------
 
 #[tokio::test]
+#[serial]
 async fn remember_batch_builds_remember_sub_ops() {
     clear_env();
     let server = MockServer::start().await;
@@ -798,6 +817,7 @@ async fn remember_batch_builds_remember_sub_ops() {
 }
 
 #[tokio::test]
+#[serial]
 async fn remember_batch_empty_short_circuits() {
     clear_env();
     let server = MockServer::start().await;
@@ -811,6 +831,7 @@ async fn remember_batch_empty_short_circuits() {
 // --- errors & metering -----------------------------------------------------
 
 #[tokio::test]
+#[serial]
 async fn error_envelope_renders_code_message() {
     clear_env();
     let server = MockServer::start().await;
@@ -841,6 +862,7 @@ async fn error_envelope_renders_code_message() {
 }
 
 #[tokio::test]
+#[serial]
 async fn flat_error_body_still_maps() {
     clear_env();
     let server = MockServer::start().await;
@@ -865,6 +887,7 @@ async fn flat_error_body_still_maps() {
 }
 
 #[tokio::test]
+#[serial]
 async fn lane_not_supported_403_is_authentication() {
     clear_env();
     let server = MockServer::start().await;
@@ -888,6 +911,7 @@ async fn lane_not_supported_403_is_authentication() {
 }
 
 #[tokio::test]
+#[serial]
 async fn rate_limit_exposes_retry_after() {
     clear_env();
     let server = MockServer::start().await;
@@ -922,6 +946,7 @@ async fn rate_limit_exposes_retry_after() {
 }
 
 #[tokio::test]
+#[serial]
 async fn overage_metering_header_is_parsed() {
     clear_env();
     let server = MockServer::start().await;
@@ -946,6 +971,7 @@ async fn overage_metering_header_is_parsed() {
 // --- health ----------------------------------------------------------------
 
 #[tokio::test]
+#[serial]
 async fn healthz_and_readyz() {
     clear_env();
     let server = MockServer::start().await;
@@ -977,6 +1003,7 @@ async fn healthz_and_readyz() {
 // --- retries ---------------------------------------------------------------
 
 #[tokio::test]
+#[serial]
 async fn retry_on_503_then_success() {
     clear_env();
     let server = MockServer::start().await;
@@ -1008,6 +1035,7 @@ async fn retry_on_503_then_success() {
 }
 
 #[tokio::test]
+#[serial]
 async fn retry_on_429_honors_retry_after() {
     clear_env();
     let server = MockServer::start().await;
